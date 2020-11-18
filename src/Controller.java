@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 
 public class Controller {
 
-    //user.fxml
+    //userFabian.fxml
 
     public ListView user_listView;
     public TextField user_name;
@@ -25,7 +25,7 @@ public class Controller {
     public TextField order_name;
     public TextArea order_description_textArea;
 
-    //department.fxml
+    //departmentFabian.fxml
 
     public ListView department_listView;
     public TextField department_id;
@@ -51,7 +51,7 @@ public class Controller {
     public ChoiceBox ticket_status_id_dropdown;
     public TextArea ticket_description;
     
-    //comment.fxml
+    //commentFabian.fxml
     
     public ListView comment_listView;
     public TextField comment_id;
