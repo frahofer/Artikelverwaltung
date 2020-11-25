@@ -15,7 +15,7 @@ public class Controller_status {
     public ListView status_listView;
     public TextField status_id;
 
-    private String filename ="stati.csv";
+    private String filename = "stati.csv";
     public ObservableList<Status> liste = FXCollections.observableArrayList();
 
     public String newString = "";
