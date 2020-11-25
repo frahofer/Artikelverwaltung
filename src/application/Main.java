@@ -13,6 +13,7 @@ public class Main extends Application {
      * Open "Run" -> "Edit Configurations..."
      * Add this to your VM options (just copy & paste the following line):
      * --module-path "C:\Program Files\Java\javafx-sdk-11.0.2\lib" --add-modules=javafx.controls,javafx.fxml
+     * --module-path "C:\Users\Petko\javafx-sdk-11.0.2\lib" --add-modules=javafx.controls,javafx.fxml
      */
 
     /**
@@ -23,7 +24,7 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxmls/scene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("view/priorityPetko.fxml"));
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
