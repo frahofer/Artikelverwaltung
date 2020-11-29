@@ -94,7 +94,7 @@ public class Controller_priority {
             String line = reader.readLine();
 
             while (line != null) {
-                oldContent = oldContent + line + "\\n";
+                oldContent = oldContent + line + "\n";
 
                 line = reader.readLine();
             }
