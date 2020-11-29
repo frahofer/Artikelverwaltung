@@ -12,7 +12,7 @@
         <TextField fx:id="priority_name" layoutX="61.0" layoutY="27.0" prefHeight="25.0" prefWidth="258.0" AnchorPane.leftAnchor="61.0" AnchorPane.topAnchor="27.0" />
         <Button layoutX="114.0" layoutY="292.0" mnemonicParsing="false" onAction="#priorityCancelClicked" text="Abbrechen" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="191.0" />
         <Button layoutX="201.0" layoutY="292.0" mnemonicParsing="false" onAction="#saveClicked" text="Speichern" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="109.0" />
-      <ListView fx:id="priority_listView" layoutX="61.0" layoutY="82.0" prefHeight="200.0" prefWidth="258.0" />
+      <ListView fx:id="priority_listView" layoutX="61.0" layoutY="82.0" onMouseClicked="#priorityMouseClicked" prefHeight="200.0" prefWidth="258.0" />
       <Label layoutX="151.0" layoutY="65.0" prefHeight="17.0" prefWidth="58.0" text="Prioritäten" />
     </children>
 </AnchorPane>

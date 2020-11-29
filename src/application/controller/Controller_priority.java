@@ -8,24 +8,22 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.FileChooser;
 
 import java.io.*;
 
 public class Controller_priority {
+
     public TextField priority_name;
     public ListView priority_listView;
     private String filename = "priorities.csv";
-    public ObservableList<Priority> liste = FXCollections.observableArrayList();
+
     public String newString = "";
     public String oldString = "";
 
+    public ObservableList<Priority> liste = FXCollections.observableArrayList();
+
+    Priority tempPrio = new Priority();
 
     public void initialize() {
         String s;
@@ -40,18 +38,47 @@ public class Controller_priority {
                     Priority a = new Priority();
 
                     String[] words = s.split(";");
-                    a.id = Integer.parseInt(words[0]);
+                    //a.id = Integer.parseInt(words[0]);
                     a.name = words[1];
 
-                    priority_listView.add(a); // füge Artikel zur Liste hinzu
+                    liste.add(a); // füge Artikel zur Liste hinzu
                 }
             } finally {
                 br.close();
             }
-        } catch (IOException io) {
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        Priority.setItems(liste);
+        priority_listView.setItems(liste);
+    }
+
+    public void priorityMouseClicked(MouseEvent mouseEvent) {
+        tempPrio = (Priority) priority_listView.getSelectionModel().getSelectedItem();
+
+        priority_name.setText(tempPrio.name);
+
+        this.oldString = tempPrio.name;
+
+    }
+
+
+    public void priorityCancelClicked() {
+        priority_name.setText(tempPrio.name);
+        Platform.exit();
+    }
+
+    public void saveClicked(ActionEvent actionEvent) {
+        Priority selectedPriority = (Priority) priority_listView.getSelectionModel().getSelectedItem();
+        selectedPriority.name = priority_name.getText();
+
+        newString = selectedPriority.name;
+
+        writeToFile(this.oldString, this.newString);
+
+        priority_listView.refresh();
+    }
+
 
     public void writeToFile(String oldText, String newText){
 
@@ -93,18 +120,4 @@ public class Controller_priority {
         }
     }
 
-    public void priorityCancelClicked(ActionEvent actionEvent) {
-        Platform.exit();
-    }
-
-    public void saveClicked(ActionEvent actionEvent) {
-        Status selectedArticle = (Status) priority_listView.getSelectionModel().getSelectedItem();
-        selectedArticle.name = priority_name.getText();
-
-        newString = selectedArticle.id + ";" + selectedArticle.name;
-
-        writeToFile(this.oldString, newString);
-
-        priority_listView.refresh();
-    }
 }
