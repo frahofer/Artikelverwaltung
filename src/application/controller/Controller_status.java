@@ -107,7 +107,7 @@ public class Controller_status {
                 String line = reader.readLine();
 
                 while (line != null) {
-                    oldContent = oldContent + line + "\\n";
+                    oldContent = oldContent + line + "\n";
 
                     line = reader.readLine();
                 }

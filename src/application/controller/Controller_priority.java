@@ -1,7 +1,6 @@
 package application.controller;
 
 import application.model.Priority;
-import application.model.Status;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -94,7 +93,7 @@ public class Controller_priority {
             String line = reader.readLine();
 
             while (line != null) {
-                oldContent = oldContent + line + "\\n";
+                oldContent = oldContent + line + "\n";
 
                 line = reader.readLine();
             }
