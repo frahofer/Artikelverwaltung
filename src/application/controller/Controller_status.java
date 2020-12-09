@@ -12,12 +12,10 @@ import java.io.*;
 
 public class Controller_status {
     public TextField status_name;
-    public ListView status_listView;
+    public ListView<Status> status_listView;
     public TextField status_id;
 
     private String filename = "stati.csv";
-    public ObservableList<Status> liste = FXCollections.observableArrayList();
-
     public String newString = "";
     public String oldString = "";
 
@@ -25,35 +23,9 @@ public class Controller_status {
 
     public void initialize(){
 
-        String line = "";
-        BufferedReader reader = null;
+        //liste = Status.loadFromFile(filename);
 
-        try {
-            reader = new BufferedReader(new FileReader(this.filename));
-
-            try{
-
-                while((line = reader.readLine()) != null){
-
-                    String[] split = line.split(";");
-                    Status temp = new Status();
-
-                    temp.id = Integer.parseInt(split[0]);
-                    temp.name = split[1];
-
-                    liste.add(temp);
-
-                }
-
-            }finally {
-                reader.close();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        status_listView.setItems(liste);
+        status_listView.setItems(Status.loadFromFile(this.filename));
 
     }
 
@@ -74,7 +46,7 @@ public class Controller_status {
 
         newString = selectedArticle.id + ";" + selectedArticle.name;
 
-        writeToFile(this.oldString, newString);
+        Status.writeToFile(this.oldString, newString, this.filename);
 
         status_listView.refresh();
 
@@ -93,43 +65,4 @@ public class Controller_status {
 
     }
 
-    public void writeToFile(String oldText, String newText){
-
-            File fileToBeModified = new File(this.filename);
-
-            String oldContent = "";
-            BufferedReader reader = null;
-            FileWriter writer = null;
-
-            try {
-                reader = new BufferedReader(new FileReader(fileToBeModified));
-
-                String line = reader.readLine();
-
-                while (line != null) {
-                    oldContent = oldContent + line + "\n";
-
-                    line = reader.readLine();
-                }
-
-                String newContent = oldContent.replaceAll(oldText, newText);
-
-                writer = new FileWriter(fileToBeModified);
-                writer.write(newContent);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    assert reader != null;
-                    reader.close();
-
-                    assert writer != null;
-                    writer.flush();
-                    writer.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
 }
