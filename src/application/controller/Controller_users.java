@@ -21,7 +21,7 @@ public class Controller_users {
     public TextField user_city;
     public TextField user_country;
     public ChoiceBox user_department_dropdown;
-    public ListView listView_users;
+    public ListView<Users> listView_users;
 
     public ObservableList<Users> liste = FXCollections.observableArrayList();
 
@@ -33,36 +33,8 @@ public class Controller_users {
     public String oldString = "";
 
     public void initialize() {
-        String s;
-        BufferedReader br = null;
-
-        try {
-            br = new BufferedReader(new FileReader("users.csv"));
-            try {
-
-                while ((s = br.readLine()) != null) {
-                    // s enthält die gesamte Zeile
-                    Users a = new Users();
-                    String[] split = s.split(";");
-                    a.id = Integer.parseInt(split[0]);
-                    a.titel = split[1];
-                    a.name = split[2];
-                    a.street = split[3];
-                    a.zip = Integer.parseInt(split[4]);
-                    a.city = split[5];
-                    a.depId = Integer.parseInt(split[6]);
-
-                    liste.add(a);
-                }
-            } finally {
-                br.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        listView_users.setItems(liste);
+        listView_users.setItems(Users.loadFromFile("users.csv"));
     }
-
     public void usersListViewClicked(MouseEvent mouseEvent) {
         tempUser = (Users) listView_users.getSelectionModel().getSelectedItem();
         user_name.setText(tempUser.name);
@@ -72,7 +44,7 @@ public class Controller_users {
         user_street.setText(tempUser.street);
         user_zip.setText(String.valueOf(tempUser.zip));
         user_city.setText(tempUser.city);
-        //this.oldString = tempUser.name;
+        this.oldString = tempUser.id + ";" + tempUser.titel + ";" + tempUser.name + ";" + tempUser.street + ";" + tempUser.zip + ";" + tempUser.depId;
     }
 
     public void cancel_user_clicked(ActionEvent actionEvent) {
@@ -89,10 +61,10 @@ public class Controller_users {
         selectedUser.name = user_name.getText();
         selectedUser.titel = user_title.getText();
         selectedUser.street = user_street.getText();
-        //selectedUser.toString(zip) = user_zip.getText();
+        selectedUser.zip = Integer.parseInt(user_zip.getText());
         selectedUser.city = user_city.getText();
 
-        newString = selectedUser.name;
+        newString = selectedUser.id + ";" + selectedUser.titel + ";" + selectedUser.name + ";" + selectedUser.street + ";" + selectedUser.zip + ";" + selectedUser.depId;
 
         writeToFile(this.oldString, this.newString);
 
