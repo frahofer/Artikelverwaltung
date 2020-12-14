@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="445.0" prefWidth="426.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.Controller_ticket">
+<AnchorPane prefHeight="241.0" prefWidth="199.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.Controller_ticket">
    <children>
-      <TextField layoutX="26.0" layoutY="38.0" prefHeight="25.0" prefWidth="375.0" promptText="Name" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="38.0" />
-      <TextArea layoutX="26.0" layoutY="84.0" prefHeight="200.0" prefWidth="375.0" promptText="Beschreibung" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="84.0" />
-      <Label layoutX="26.0" layoutY="301.0" text="Auftrag" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="301.0" />
-      <Label layoutX="26.0" layoutY="328.0" text="Status" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="328.0" />
-      <Label layoutX="26.0" layoutY="353.0" text="Priorität" AnchorPane.leftAnchor="26.0" AnchorPane.topAnchor="353.0" />
-      <ComboBox layoutX="81.0" layoutY="297.0" prefHeight="25.0" prefWidth="320.0" AnchorPane.bottomAnchor="123.0" AnchorPane.rightAnchor="25.0" />
-      <ComboBox layoutX="81.0" layoutY="324.0" prefHeight="25.0" prefWidth="320.0" AnchorPane.bottomAnchor="96.0" AnchorPane.rightAnchor="25.0" />
-      <ComboBox layoutX="81.0" layoutY="349.0" prefHeight="25.0" prefWidth="320.0" />
-      <Button layoutX="262.0" layoutY="406.0" mnemonicParsing="false" text="Abbrechen" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="90.0" />
-      <Button layoutX="343.0" layoutY="406.0" mnemonicParsing="false" text="Speichern" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <TextField fx:id="ticket_name" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="169.0" promptText="Name" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <TextArea fx:id="ticket_description" layoutX="14.0" layoutY="46.0" prefHeight="60.0" prefWidth="169.0" promptText="Beschreibung" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="46.0" />
+      <Label layoutX="14.0" layoutY="116.0" text="Auftrag" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="116.0" />
+      <Label layoutX="14.0" layoutY="144.0" text="Status" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="144.0" />
+      <Label layoutX="14.0" layoutY="171.0" text="Priorität" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="171.0" />
+      <Button layoutX="255.0" layoutY="201.0" mnemonicParsing="false" onAction="#cancelClicked" text="Abbrechen" AnchorPane.bottomAnchor="14.666666666666657" AnchorPane.rightAnchor="90.0" />
+      <Button layoutX="336.0" layoutY="201.0" mnemonicParsing="false" onAction="#saveClicked" text="Speichern" AnchorPane.bottomAnchor="14.666666666666657" AnchorPane.rightAnchor="14.333333333333314" />
+      <TextField fx:id="auftrag_nr" layoutX="66.0" layoutY="112.0" prefHeight="25.0" prefWidth="117.0" />
+      <TextField fx:id="status_nr" layoutX="66.0" layoutY="140.0" prefHeight="25.0" prefWidth="117.0" />
+      <TextField fx:id="priority_nr" layoutX="66.0" layoutY="168.0" prefHeight="25.0" prefWidth="117.0" />
    </children>
 </AnchorPane>
