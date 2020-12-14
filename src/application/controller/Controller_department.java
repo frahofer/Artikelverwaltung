@@ -13,11 +13,12 @@ import java.io.*;
 public class Controller_department {
     public TextField department_name;
     public ListView<Department> department_listView;
-    public TextField department_id;
 
     private String filename = "departments.csv";
     public String newString = "";
     public String oldString = "";
+
+    private int department_id = 0;
 
     Department temp2 = new Department();
 
@@ -30,7 +31,7 @@ public class Controller_department {
 
     public void cancelClicked(ActionEvent actionEvent) {
 
-        department_id.setText(Integer.toString(temp2.id));
+        department_id = temp2.id;
         department_name.setText(temp2.name);
 
     }
@@ -39,7 +40,7 @@ public class Controller_department {
 
         Department selectedArticle = department_listView.getSelectionModel().getSelectedItem();
         selectedArticle.name = department_name.getText();
-        selectedArticle.id = Integer.parseInt(department_id.getText());
+        selectedArticle.id = department_id;
 
         newString = selectedArticle.id + ";" + selectedArticle.name;
 
@@ -54,7 +55,7 @@ public class Controller_department {
 
         //fülle Felder rechts
 
-        department_id.setText(Integer.toString(temp2.id));
+        department_id = temp2.id;
         department_name.setText(temp2.name);
 
         //olString für saveClicked
