@@ -24,7 +24,7 @@ public class Controller {
         Parent root = this.loader.loadFXML("view/ticketPetko.fxml");
         contentPane.getChildren().add(root);
 
-        this.controller = (Controller_ticket) loader.getController();
+        this.controller = (Controller_ticket) this.loader.getController();
         this.controller.initiateListView(ticketListView);
 
     }

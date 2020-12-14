@@ -1,6 +1,5 @@
 package application.controller;
 
-import application.model.Status;
 import application.model.Ticket;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
@@ -70,7 +69,7 @@ public class Controller_ticket {
 
         newString = temp2.id + ";" + temp2.name + ";" + temp2.description + ";" + temp2.status_id + ";" + temp2.priority_id;
 
-        Status.writeToFile(this.oldString, newString, this.filename);
+        Ticket.writeToFile(this.oldString, newString, this.filename);
 
         //status_listView.refresh();
 
