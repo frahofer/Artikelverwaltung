@@ -6,17 +6,15 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="241.0" prefWidth="199.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.Controller_ticket">
+<AnchorPane prefHeight="297.0" prefWidth="324.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.Controller_ticket">
    <children>
-      <TextField fx:id="ticket_name" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="169.0" promptText="Name" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
-      <TextArea fx:id="ticket_description" layoutX="14.0" layoutY="46.0" prefHeight="60.0" prefWidth="169.0" promptText="Beschreibung" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="46.0" />
-      <Label layoutX="14.0" layoutY="116.0" text="Auftrag" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="116.0" />
-      <Label layoutX="14.0" layoutY="144.0" text="Status" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="144.0" />
-      <Label layoutX="14.0" layoutY="171.0" text="Priorität" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="171.0" />
+      <TextField fx:id="ticket_name" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="297.0" promptText="Name" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <TextArea fx:id="ticket_description" layoutX="14.0" layoutY="46.0" prefHeight="92.0" prefWidth="297.0" promptText="Beschreibung" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="46.0" />
+      <Label layoutX="14.0" layoutY="150.0" text="Status" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="150.0" />
+      <Label layoutX="14.0" layoutY="181.0" text="Priorität" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="181.0" />
       <Button layoutX="255.0" layoutY="201.0" mnemonicParsing="false" onAction="#cancelClicked" text="Abbrechen" AnchorPane.bottomAnchor="14.666666666666657" AnchorPane.rightAnchor="90.0" />
       <Button layoutX="336.0" layoutY="201.0" mnemonicParsing="false" onAction="#saveClicked" text="Speichern" AnchorPane.bottomAnchor="14.666666666666657" AnchorPane.rightAnchor="14.333333333333314" />
-      <TextField fx:id="auftrag_nr" layoutX="66.0" layoutY="112.0" prefHeight="25.0" prefWidth="117.0" />
-      <TextField fx:id="status_nr" layoutX="66.0" layoutY="140.0" prefHeight="25.0" prefWidth="117.0" />
-      <TextField fx:id="priority_nr" layoutX="66.0" layoutY="168.0" prefHeight="25.0" prefWidth="117.0" />
+      <TextField fx:id="status_nr" layoutX="66.0" layoutY="146.0" prefHeight="25.0" prefWidth="244.0" />
+      <TextField fx:id="priority_nr" layoutX="66.0" layoutY="178.0" prefHeight="25.0" prefWidth="244.0" />
    </children>
 </AnchorPane>

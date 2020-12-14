@@ -19,9 +19,8 @@
           <Menu mnemonicParsing="false" text="Einstellungen">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#editUserClicked" text="user" />
-                  <MenuItem mnemonicParsing="false" onAction="#editTicketClicked" text="ticket" />
                   <MenuItem mnemonicParsing="false" onAction="#editCommentClicked" text="comment" />
-              <MenuItem mnemonicParsing="false" onAction="#editDepartmentClicked" text="department" />
+                  <MenuItem mnemonicParsing="false" onAction="#editDepartmentClicked" text="department" />
                   <MenuItem mnemonicParsing="false" onAction="#editOrderClicked" text="order" />
                   <MenuItem mnemonicParsing="false" onAction="#editPriorityClicked" text="priority" />
                   <MenuItem mnemonicParsing="false" onAction="#editStatusClicked" text="status" />

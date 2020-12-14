@@ -13,24 +13,21 @@ import javafx.scene.layout.AnchorPane;
 
 public class Controller {
 
-    public TextField comment_title;
-    public TextField comment_date;
-    public TextArea comment_texArea;
     public AnchorPane contentPane;
     public ListView<Ticket> ticketListView;
 
+    MyFXMLLoader loader = new MyFXMLLoader();
+    Controller_ticket controller = new Controller_ticket();
+
     public void initialize(){
-        MyFXMLLoader loader = new MyFXMLLoader();
-        Parent root = loader.loadFXML("view/ticketPetko.fxml");
+
+        Parent root = this.loader.loadFXML("view/ticketPetko.fxml");
         contentPane.getChildren().add(root);
 
-        Controller_ticket controller = (Controller_ticket) loader.getController();
-
-        controller.passTicket(ticketListView);
-
+        this.controller = (Controller_ticket) loader.getController();
+        this.controller.initiateListView(ticketListView);
 
     }
-
 
     public void editPriorityClicked(ActionEvent actionEvent) {
         MyFXMLLoader loader = new MyFXMLLoader();
@@ -72,6 +69,7 @@ public class Controller {
 
     public void ticketListViewClicked(MouseEvent mouseEvent) {
 
+        controller.passTicket(ticketListView);
 
     }
 

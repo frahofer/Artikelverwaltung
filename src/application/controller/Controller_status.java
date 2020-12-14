@@ -13,11 +13,12 @@ import java.io.*;
 public class Controller_status {
     public TextField status_name;
     public ListView<Status> status_listView;
-    public TextField status_id;
 
     private String filename = "stati.csv";
     public String newString = "";
     public String oldString = "";
+
+    private int status_id = 0;
 
     Status temp2 = new Status();
 
@@ -33,7 +34,7 @@ public class Controller_status {
 
         //setzte Felder zurück auf den letzten ausgewählten status
 
-        status_id.setText(Integer.toString(temp2.id));
+        this.status_id = temp2.id;
         status_name.setText(temp2.name);
 
     }
@@ -42,7 +43,7 @@ public class Controller_status {
 
         Status selectedArticle = (Status) status_listView.getSelectionModel().getSelectedItem();
         selectedArticle.name = status_name.getText();
-        selectedArticle.id = Integer.parseInt(status_id.getText());
+        selectedArticle.id = this.status_id;
 
         newString = selectedArticle.id + ";" + selectedArticle.name;
 
@@ -57,7 +58,7 @@ public class Controller_status {
 
         //fülle Felder rechts
 
-        status_id.setText(Integer.toString(temp2.id));
+        this.status_id = temp2.id;
         status_name.setText(temp2.name);
 
         //olString für saveClicked

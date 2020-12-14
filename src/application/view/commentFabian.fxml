@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="331.0" prefWidth="469.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.Controller">
+<AnchorPane prefHeight="331.0" prefWidth="469.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.Controller_comment">
    <children>
       <Button layoutX="284.0" layoutY="290.0" mnemonicParsing="false" onAction="#cancel_comment_clicked" text="Abbrechen" AnchorPane.bottomAnchor="15.666666666666668" AnchorPane.rightAnchor="111.0" />
       <Button layoutX="377.0" layoutY="290.0" mnemonicParsing="false" onAction="#save_comment_clicked" prefHeight="25.0" prefWidth="73.0" text="Speichern" AnchorPane.bottomAnchor="15.666666666666668" AnchorPane.rightAnchor="18.66666666666667" />
