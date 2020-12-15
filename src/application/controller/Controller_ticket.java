@@ -1,6 +1,8 @@
 package application.controller;
 
 import application.model.Ticket;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
@@ -29,10 +31,6 @@ public class Controller_ticket {
 
     }
 
-    public void initiateListView(ListView<Ticket> listView){
-        listView.setItems(Ticket.loadFromFile(this.filename));
-    }
-
     public void passTicket(ListView<Ticket> listView){
 
         temp2 = (Ticket) listView.getSelectionModel().getSelectedItem();
@@ -45,6 +43,7 @@ public class Controller_ticket {
 
         //oldString für saveClicked
         this.oldString = temp2.id + ";" + temp2.name + ";" + temp2.description + ";" + temp2.status_id + ";" + temp2.priority_id;
+
     }
 
     public void cancelClicked(ActionEvent actionEvent) {
