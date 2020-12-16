@@ -158,4 +158,13 @@ public class Controller {
         ticketListView.setItems(listClone_ticket_backup);
 
     }
+
+    public void newClicked(ActionEvent actionEvent) {
+    }
+
+    public void deleteClicked(ActionEvent actionEvent) {
+    }
+
+    public void saveClicked(ActionEvent actionEvent) {
+    }
 }
