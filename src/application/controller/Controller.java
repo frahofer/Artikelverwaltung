@@ -15,7 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import org.graalvm.compiler.nodeinfo.StructuralInput;
+//import org.graalvm.compiler.nodeinfo.StructuralInput;
 
 public class Controller {
 
