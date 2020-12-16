@@ -43,7 +43,7 @@ public class Ticket {
 
                 }
 
-            }finally {
+            } finally {
                 reader.close();
             }
 
