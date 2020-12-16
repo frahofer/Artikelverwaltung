@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import org.graalvm.compiler.nodeinfo.StructuralInput;
 
 public class Controller {
 
@@ -37,6 +38,8 @@ public class Controller {
     private String filename_ticket = "tickets.csv";
     private String filename_status = "stati.csv";
     private String filename_priority = "priorities.csv";
+
+    private Controller_ticket active = null;
 
     public void initialize(){
 
@@ -96,7 +99,19 @@ public class Controller {
 
     public void ticketListViewClicked(MouseEvent mouseEvent) {
 
-        controller.passTicket(ticketListView);
+        if (ticketListView.getSelectionModel().getSelectedItem() != null) {
+            MyFXMLLoader loader = new MyFXMLLoader();
+            Parent root = loader.loadFXML("view/ticket.fxml");
+            AnchorPane.setBottomAnchor(root, 0.0);
+            AnchorPane.setTopAnchor(root, 0.0);
+            AnchorPane.setLeftAnchor(root, 0.0);
+            AnchorPane.setRightAnchor(root, 0.0);
+            contentPane.getChildren().add(root);
+
+            active = (Controller_ticket) loader.getController();
+            active.setTicket(ticketListView.getSelectionModel().getSelectedItem());
+            //active.passTicket(ticketListView);
+        }
 
     }
 
@@ -160,11 +175,26 @@ public class Controller {
     }
 
     public void newClicked(ActionEvent actionEvent) {
+        MyFXMLLoader loader = new MyFXMLLoader();
+        Parent root = loader.loadFXML("view/ticket.fxml");
+        AnchorPane.setBottomAnchor(root, 0.0);
+        AnchorPane.setTopAnchor(root, 0.0);
+        AnchorPane.setLeftAnchor(root, 0.0);
+        AnchorPane.setRightAnchor(root, 0.0);
+        contentPane.getChildren().add(root);
+
+        Controller_ticket controller = (Controller_ticket) loader.getController();
+        controller.setTicket(null);
     }
 
     public void deleteClicked(ActionEvent actionEvent) {
+        // Laden des Tickets
+        // Entfernen aus ListView
+        // Datei aktualisierne
     }
 
     public void saveClicked(ActionEvent actionEvent) {
+        // Wenn Ticket neu -> laden des Tickets und hinzufügen zur Liste!
+        // Datei aktualisieren
     }
 }

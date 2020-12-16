@@ -20,6 +20,7 @@ public class Controller_ticket {
     public String oldString = "";
 
     private int ticket_id = 0;
+    private Ticket ticket;
 
     Ticket temp2 = new Ticket();
 
@@ -72,5 +73,24 @@ public class Controller_ticket {
 
         //status_listView.refresh();
 
+    }
+
+    public void setTicket(Ticket t) {
+        this.ticket = t;
+    }
+
+    public Ticket getTicket() {
+        /**
+         * aktualisieren der Ticket-Daten
+         */
+
+        // ticket.id = this.ticket_id;
+        ticket.name = ticket_name.getText();
+        ticket.description = ticket_description.getText();
+        ticket.status_id = Integer.parseInt(status_nr.getText());
+        ticket.priority_id = Integer.parseInt(priority_nr.getText());
+
+
+        return ticket;
     }
 }
