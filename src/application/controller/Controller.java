@@ -10,12 +10,10 @@ import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import org.graalvm.compiler.nodeinfo.StructuralInput;
 
 public class Controller {
 
@@ -99,7 +97,11 @@ public class Controller {
 
     public void ticketListViewClicked(MouseEvent mouseEvent) {
 
+        controller.passListView(ticketListView);
+
+        /*
         if (ticketListView.getSelectionModel().getSelectedItem() != null) {
+
             MyFXMLLoader loader = new MyFXMLLoader();
             Parent root = loader.loadFXML("view/ticket.fxml");
             AnchorPane.setBottomAnchor(root, 0.0);
@@ -112,8 +114,10 @@ public class Controller {
             active.setTicket(ticketListView.getSelectionModel().getSelectedItem());
             //active.passTicket(ticketListView);
         }
+         */
 
     }
+
 
     public void status_ComboBox_Active(ActionEvent actionEvent) {
 
@@ -188,12 +192,16 @@ public class Controller {
     }
 
     public void deleteClicked(ActionEvent actionEvent) {
-        // Laden des Tickets
-        // Entfernen aus ListView
-        // Datei aktualisierne
+
+        controller.deleteClicked(liste_ticket);
+
+        ticketListView.refresh();
     }
 
     public void saveClicked(ActionEvent actionEvent) {
+
+        controller.saveClicked(actionEvent);
+
         // Wenn Ticket neu -> laden des Tickets und hinzufügen zur Liste!
         // Datei aktualisieren
     }

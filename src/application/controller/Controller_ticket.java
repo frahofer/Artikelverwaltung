@@ -32,7 +32,7 @@ public class Controller_ticket {
 
     }
 
-    public void passTicket(ListView<Ticket> listView){
+    public void passListView(ListView<Ticket> listView){
 
         temp2 = (Ticket) listView.getSelectionModel().getSelectedItem();
 
@@ -73,6 +73,25 @@ public class Controller_ticket {
 
         //status_listView.refresh();
 
+    }
+
+    public ObservableList<Ticket> deleteClicked(ObservableList<Ticket> liste_ticket) {
+        // Laden des Tickets
+        temp2.id = ticket_id;
+        temp2.name = ticket_name.getText();
+        temp2.description = ticket_description.getText();
+        temp2.status_id = Integer.parseInt(status_nr.getText());
+        temp2.priority_id = Integer.parseInt(priority_nr.getText());
+
+        // Entfernen aus ListView
+        liste_ticket.remove(temp2);
+
+        // Datei aktualisierne
+        String oldString2 = temp2.id + ";" + temp2.name + ";" + temp2.description + ";" + temp2.status_id + ";" + temp2.priority_id + "\n";
+
+        Ticket.writeToFile(oldString2, "", this.filename);
+
+        return liste_ticket;
     }
 
     public void setTicket(Ticket t) {
