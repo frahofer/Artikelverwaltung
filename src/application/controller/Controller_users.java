@@ -1,12 +1,15 @@
 package application.controller;
 
+import application.model.Department;
 import application.model.Priority;
+import application.model.Ticket;
 import application.model.Users;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -20,21 +23,26 @@ public class Controller_users {
     public TextField user_zip;
     public TextField user_city;
     public TextField user_country;
-    public ChoiceBox user_department_dropdown;
     public ListView<Users> listView_users;
 
     public ObservableList<Users> liste = FXCollections.observableArrayList();
+    public ComboBox departmentComboBox;
 
     private String filename = "users.csv";
 
     Users tempUser = new Users();
-    //test
+
     public String newString = "";
     public String oldString = "";
+
+
+    ObservableList<Department> list_department = FXCollections.observableArrayList();
+    private String filename_department = "departments.csv";
 
     public void initialize() {
         listView_users.setItems(Users.loadFromFile("users.csv"));
     }
+
     public void usersListViewClicked(MouseEvent mouseEvent) {
         tempUser = (Users) listView_users.getSelectionModel().getSelectedItem();
         user_name.setText(tempUser.name);
@@ -109,5 +117,11 @@ public class Controller_users {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void department_active(ActionEvent actionEvent) {
+        list_department = Department.loadFromFile(filename_department);
+
+        departmentComboBox.setItems(list_department);
     }
 }

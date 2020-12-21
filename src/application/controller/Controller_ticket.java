@@ -96,6 +96,9 @@ public class Controller_ticket {
 
     public void setTicket(Ticket t) {
         this.ticket = t;
+
+        ticket_name.setText(t.name);
+        ticket_description.setText(t.description);
     }
 
     public Ticket getTicket() {
@@ -108,7 +111,6 @@ public class Controller_ticket {
         ticket.description = ticket_description.getText();
         ticket.status_id = Integer.parseInt(status_nr.getText());
         ticket.priority_id = Integer.parseInt(priority_nr.getText());
-
 
         return ticket;
     }
