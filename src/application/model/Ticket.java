@@ -17,6 +17,22 @@ public class Ticket {
         return id + ";" + name + ";" + description + ";" + status_id + ";" + priority_id;
     }
 
+    public void saveNewTicket(Ticket newTicket, String filename) {
+
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(filename, true));
+
+            bw.write(newTicket.id + ";" + newTicket.name + ";" + newTicket.description + ";" + newTicket.status_id + ";" + newTicket.priority_id + "\n");
+
+            bw.flush();
+            bw.close();
+
+        } catch (IOException io) {
+
+        }
+
+    }
+
     public static ObservableList<Ticket> loadFromFile(String filename){
         ObservableList<Ticket> liste = FXCollections.observableArrayList();
 

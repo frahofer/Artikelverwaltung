@@ -37,7 +37,11 @@ public class Controller {
     private String filename_status = "stati.csv";
     private String filename_priority = "priorities.csv";
 
+    private boolean new_clicked = false;
+
     private Controller_ticket active = null;
+
+    private Ticket temp = new Ticket();
 
     public void initialize(){
 
@@ -179,28 +183,32 @@ public class Controller {
     }
 
     public void newClicked(ActionEvent actionEvent) {
-        MyFXMLLoader loader = new MyFXMLLoader();
-        Parent root = loader.loadFXML("view/ticket.fxml");
-        AnchorPane.setBottomAnchor(root, 0.0);
-        AnchorPane.setTopAnchor(root, 0.0);
-        AnchorPane.setLeftAnchor(root, 0.0);
-        AnchorPane.setRightAnchor(root, 0.0);
-        contentPane.getChildren().add(root);
 
-        Controller_ticket controller = (Controller_ticket) loader.getController();
-        controller.setTicket(null);
+        new_clicked = true;
+
+        controller.newClicked(liste_ticket);
+
     }
 
     public void deleteClicked(ActionEvent actionEvent) {
 
-        controller.deleteClicked(liste_ticket);
+        Ticket selectedTicket = (Ticket) ticketListView.getSelectionModel().getSelectedItem();
+
+        liste_ticket = controller.deleteClicked(selectedTicket, liste_ticket);
+        ticketListView.setItems(liste_ticket);
 
         ticketListView.refresh();
     }
 
     public void saveClicked(ActionEvent actionEvent) {
 
-        controller.saveClicked(actionEvent);
+        temp = controller.getTicket();
+
+        controller.saveClicked(temp, new_clicked);
+
+        liste_ticket.add(temp);
+        new_clicked = false;
+        ticketListView.refresh();
 
         // Wenn Ticket neu -> laden des Tickets und hinzufügen zur Liste!
         // Datei aktualisieren

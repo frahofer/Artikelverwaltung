@@ -20,9 +20,9 @@ public class Controller_ticket {
     public String oldString = "";
 
     private int ticket_id = 0;
-    private Ticket ticket;
 
-    Ticket temp2 = new Ticket();
+    private Ticket ticket = new Ticket();
+    private Ticket temp2 = new Ticket();
 
     public void initialize(){
         ticket_name.setText("");
@@ -59,35 +59,40 @@ public class Controller_ticket {
 
     }
 
-    public void saveClicked(ActionEvent actionEvent) {
+    public void saveClicked(Ticket selectedTicket, boolean new_clicked) {
 
-        temp2.id = this.ticket_id;
-        temp2.name = ticket_name.getText();
-        temp2.description = ticket_description.getText();
-        temp2.status_id = Integer.parseInt(status_nr.getText());
-        temp2.priority_id = Integer.parseInt(priority_nr.getText());
+        selectedTicket.id = this.ticket_id;
+        selectedTicket.name = ticket_name.getText();
+        selectedTicket.description = ticket_description.getText();
+        selectedTicket.status_id = Integer.parseInt(status_nr.getText());
+        selectedTicket.priority_id = Integer.parseInt(priority_nr.getText());
 
-        newString = temp2.id + ";" + temp2.name + ";" + temp2.description + ";" + temp2.status_id + ";" + temp2.priority_id;
 
-        Ticket.writeToFile(this.oldString, newString, this.filename);
+        if(new_clicked){
+            selectedTicket.saveNewTicket(selectedTicket, this.filename);
+        }else{
+            newString = selectedTicket.id + ";" + selectedTicket.name + ";" + selectedTicket.description + ";" + selectedTicket.status_id + ";" + selectedTicket.priority_id;
+
+            Ticket.writeToFile(this.oldString, newString, this.filename);
+        }
 
         //status_listView.refresh();
 
     }
 
-    public ObservableList<Ticket> deleteClicked(ObservableList<Ticket> liste_ticket) {
+    public ObservableList<Ticket> deleteClicked(Ticket selectedTicket, ObservableList<Ticket> liste_ticket) {
         // Laden des Tickets
-        temp2.id = ticket_id;
-        temp2.name = ticket_name.getText();
-        temp2.description = ticket_description.getText();
-        temp2.status_id = Integer.parseInt(status_nr.getText());
-        temp2.priority_id = Integer.parseInt(priority_nr.getText());
+        selectedTicket.id = ticket_id;
+        selectedTicket.name = ticket_name.getText();
+        selectedTicket.description = ticket_description.getText();
+        selectedTicket.status_id = Integer.parseInt(status_nr.getText());
+        selectedTicket.priority_id = Integer.parseInt(priority_nr.getText());
 
         // Entfernen aus ListView
-        liste_ticket.remove(temp2);
+        liste_ticket.remove(selectedTicket);
 
         // Datei aktualisierne
-        String oldString2 = temp2.id + ";" + temp2.name + ";" + temp2.description + ";" + temp2.status_id + ";" + temp2.priority_id + "\n";
+        String oldString2 = selectedTicket.id + ";" + selectedTicket.name + ";" + selectedTicket.description + ";" + selectedTicket.status_id + ";" + selectedTicket.priority_id + "\n";
 
         Ticket.writeToFile(oldString2, "", this.filename);
 
@@ -102,16 +107,26 @@ public class Controller_ticket {
     }
 
     public Ticket getTicket() {
-        /**
-         * aktualisieren der Ticket-Daten
-         */
 
-        // ticket.id = this.ticket_id;
+        //übergeben der Ticket-Daten
+
+        ticket.id = this.ticket_id;
         ticket.name = ticket_name.getText();
         ticket.description = ticket_description.getText();
         ticket.status_id = Integer.parseInt(status_nr.getText());
         ticket.priority_id = Integer.parseInt(priority_nr.getText());
 
         return ticket;
+    }
+
+    public void newClicked(ObservableList<Ticket> liste) {
+        int index = liste.size() - 1;
+
+        ticket_id = liste.get(index).id + 1;
+        ticket_name.clear();
+        ticket_description.clear();
+        status_nr.clear();
+        priority_nr.clear();
+
     }
 }
