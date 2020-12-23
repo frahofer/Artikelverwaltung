@@ -58,6 +58,7 @@ public class Controller {
         filterPriorityComboBox.setItems(liste_priority);
 
         listClone_ticket_backup = liste_ticket;
+        listClone_ticket = liste_ticket;
 
     }
 
@@ -125,60 +126,55 @@ public class Controller {
 
     public void status_ComboBox_Active(ActionEvent actionEvent) {
 
-        listClone_ticket.clear();
+
 
         Status selectedStatus = (Status) filterStatusComboBox.getSelectionModel().getSelectedItem();
 
-        for (Ticket ticket : liste_ticket) {
+        for (Ticket ticket : listClone_ticket) {
 
-            if (ticket.status_id == selectedStatus.id) {
-                listClone_ticket.add(ticket);
+            if (ticket.status_id != selectedStatus.id) {
+                listClone_ticket.remove(ticket);
             }
         }
 
-        listClone_ticket_backup = listClone_ticket;
-        ticketListView.setItems(listClone_ticket_backup);
+        listClone_ticket = removeDuplicants(listClone_ticket);
+        ticketListView.setItems(listClone_ticket);
+
 
     }
 
     public void name_searchField_active(KeyEvent keyEvent) {
 
-        listClone_ticket.clear();
-
         String searchText = filterNameTextField.getText();
 
         if (!searchText.equals("")) {
 
-            for (Ticket ticket : liste_ticket) {
+            for (Ticket ticket : listClone_ticket) {
 
-                if (ticket.name.contains(searchText)) {
-                    listClone_ticket.add(ticket);
+                if (!ticket.name.contains(searchText)) {
+                    listClone_ticket.remove(ticket);
                 }
             }
-            ticketListView.setItems(listClone_ticket);
-        } else {
-            ticketListView.setItems(listClone_ticket_backup);
         }
 
-        listClone_ticket_backup = listClone_ticket;
+        listClone_ticket = removeDuplicants(listClone_ticket);
+        ticketListView.setItems(listClone_ticket);
 
     }
 
     public void priority_ComboBox_Active(ActionEvent actionEvent) {
 
-        listClone_ticket.clear();
-
         Priority selectedPriority = (Priority) filterPriorityComboBox.getSelectionModel().getSelectedItem();
 
-        for (Ticket ticket : liste_ticket) {
+        for (Ticket ticket : listClone_ticket) {
 
-            if (ticket.priority_id == selectedPriority.id) {
-                listClone_ticket.add(ticket);
+            if (ticket.priority_id != selectedPriority.id) {
+                listClone_ticket.remove(ticket);
             }
         }
 
-        listClone_ticket_backup = listClone_ticket;
-        ticketListView.setItems(listClone_ticket_backup);
+        listClone_ticket = removeDuplicants(listClone_ticket);
+        ticketListView.setItems(listClone_ticket);
 
     }
 
@@ -204,13 +200,45 @@ public class Controller {
 
         temp = controller.getTicket();
 
-        controller.saveClicked(temp, new_clicked);
+        liste_ticket = controller.saveClicked(temp, new_clicked, liste_ticket);
 
-        liste_ticket.add(temp);
         new_clicked = false;
+
+        ticketListView.setItems(liste_ticket);
         ticketListView.refresh();
 
         // Wenn Ticket neu -> laden des Tickets und hinzufügen zur Liste!
         // Datei aktualisieren
+    }
+
+    public ObservableList<Ticket> removeDuplicants(ObservableList<Ticket> liste){
+        int i = 0;
+        int j = 0;
+        Ticket t2 = new Ticket();
+        ObservableList<Ticket> remove_list = FXCollections.observableArrayList();;
+
+        for(Ticket t: liste){
+            for(j = 0; j < liste.size(); ++j){
+                t2 = liste.get(j);
+                if(t.id == t2.id){
+                    liste.remove(t);
+                }
+            }
+        }
+
+/*
+        for(Ticket t: liste){
+            for (i = 0; i < remove_list.size(); ++i){
+                t2 = remove_list.get(i);
+                if(t.id == t2.id){
+                    liste.remove(t);
+                }
+            }
+        }
+
+ */
+
+
+        return liste;
     }
 }

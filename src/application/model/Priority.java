@@ -29,8 +29,9 @@ public class Priority {
                     Priority a = new Priority();
 
                     String[] words = s.split(";");
-                    //a.id = Integer.parseInt(words[0]);
+                    a.id = Integer.parseInt(words[0]);
                     a.name = words[1];
+
 
                     liste.add(a); // füge Artikel zur Liste hinzu
                 }
