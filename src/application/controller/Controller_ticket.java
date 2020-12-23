@@ -91,7 +91,7 @@ public class Controller_ticket {
         // Entfernen aus ListView
         liste_ticket.remove(selectedTicket);
 
-        // Datei aktualisierne
+        // Datei aktualisieren
         String oldString2 = selectedTicket.id + ";" + selectedTicket.name + ";" + selectedTicket.description + ";" + selectedTicket.status_id + ";" + selectedTicket.priority_id + "\n";
 
         Ticket.writeToFile(oldString2, "", this.filename);

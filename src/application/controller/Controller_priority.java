@@ -10,8 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.io.*;
-//test
-public class Controller_priority {
+    class Controller_priority {
 
     public TextField priority_name;
     public ListView<Priority> priority_listView;

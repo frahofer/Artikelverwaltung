@@ -52,6 +52,9 @@ public class Controller_users {
         user_street.setText(tempUser.street);
         user_zip.setText(String.valueOf(tempUser.zip));
         user_city.setText(tempUser.city);
+        //list_department = Department.loadFromFile(filename_department);
+        //departmentComboBox.setItems(list_department);
+
         this.oldString = tempUser.id + ";" + tempUser.titel + ";" + tempUser.name + ";" + tempUser.street + ";" + tempUser.zip + ";" + tempUser.depId;
     }
 
@@ -79,7 +82,7 @@ public class Controller_users {
         listView_users.refresh();
     }
 
-    public void writeToFile(String oldText, String newText){
+    public void writeToFile(String oldText, String newText) {
 
         File fileToBeModified = new File(this.filename);
 
@@ -123,5 +126,6 @@ public class Controller_users {
         list_department = Department.loadFromFile(filename_department);
 
         departmentComboBox.setItems(list_department);
+        departmentComboBox.setValue(listView_users.getSelectionModel().getSelectedItem());
     }
 }
