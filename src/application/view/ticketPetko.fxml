@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -11,7 +12,7 @@
       <TextArea fx:id="ticket_description" layoutX="14.0" layoutY="46.0" prefHeight="92.0" prefWidth="297.0" promptText="Beschreibung" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="46.0" />
       <Label layoutX="14.0" layoutY="150.0" text="Status" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="150.0" />
       <Label layoutX="14.0" layoutY="181.0" text="Priorität" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="181.0" />
-      <TextField fx:id="status_nr" layoutX="66.0" layoutY="146.0" prefHeight="25.0" prefWidth="244.0" />
-      <TextField fx:id="priority_nr" layoutX="66.0" layoutY="178.0" prefHeight="25.0" prefWidth="244.0" />
+      <ComboBox fx:id="statusComboBox" layoutX="66.0" layoutY="146.0" prefHeight="25.0" prefWidth="244.0" AnchorPane.bottomAnchor="98.66666666666667" AnchorPane.rightAnchor="14.0" />
+      <ComboBox fx:id="priorityComboBox" layoutX="66.0" layoutY="177.0" prefHeight="25.0" prefWidth="244.0" AnchorPane.bottomAnchor="67.66666666666667" AnchorPane.rightAnchor="14.0" />
    </children>
 </AnchorPane>
