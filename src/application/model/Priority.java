@@ -4,6 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 //test
 public class Priority {
     public int id = 0;
@@ -14,6 +19,33 @@ public class Priority {
     public String toString() {
         return name;
     }
+
+    public static ObservableList<Priority> loadList(){
+        ObservableList<Priority> list = FXCollections.observableArrayList();
+
+        try{
+            Connection connection = AccessDb.getConnection();
+
+            Statement statement = null;
+
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM priorities");
+
+            while(result.next()){
+                Priority p = new Priority();
+                p.id = result.getInt("priority_id");
+                p.name = result.getString("name");
+                list.add(p);
+                System.out.println("yeet 2");
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return list;
+    }
+
 
     public static ObservableList<Priority> loadFromFile(String filename) {
         ObservableList<Priority> liste = FXCollections.observableArrayList();

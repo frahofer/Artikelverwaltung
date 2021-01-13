@@ -26,7 +26,7 @@ public class Controller_status {
 
         //liste = Status.loadFromFile(filename);
 
-        status_listView.setItems(Status.loadFromFile(this.filename));
+        status_listView.setItems(Status.loadList());
 
     }
 

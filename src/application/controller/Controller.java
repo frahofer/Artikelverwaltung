@@ -50,8 +50,8 @@ public class Controller {
 
         this.controller = (Controller_ticket) this.loader.getController();
         liste_ticket = Ticket.loadFromFile(filename_ticket);
-        liste_status = Status.loadFromFile(filename_status);
-        liste_priority = Priority.loadFromFile(filename_priority);
+        liste_status = Status.loadList();
+        liste_priority = Priority.loadList();
 
         ticketListView.setItems(liste_ticket);
         filterStatusComboBox.setItems(liste_status);

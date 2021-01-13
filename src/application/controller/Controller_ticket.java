@@ -35,8 +35,8 @@ public class Controller_ticket {
         ticket_name.setText("");
         ticket_description.setText("");
 
-        liste_status = Status.loadFromFile(filename_status);
-        liste_priority = Priority.loadFromFile(filename_priority);
+        liste_status = Status.loadList();
+        liste_priority = Priority.loadList();
 
         statusComboBox.setItems(liste_status);
         priorityComboBox.setItems(liste_priority);

@@ -24,7 +24,7 @@ import java.io.*;
     private String filename = "priorities.csv";
 
     public void initialize() {
-        priority_listView.setItems(Priority.loadFromFile("priorities.csv"));
+        priority_listView.setItems(Priority.loadList());
     }
 
     public void priorityMouseClicked(MouseEvent mouseEvent) {
