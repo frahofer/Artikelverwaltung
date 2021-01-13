@@ -7,20 +7,21 @@ import java.sql.SQLException;
 public class AccessDb {
 
     static {
-        try{
+        try {
             Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
-        }catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
     private static Connection connection = null;
 
-    public static Connection getConnection(){
-        if(connection == null){
-            try{
-                connection = DriverManager.getConnection("jdbc:ucanaccess://D:/Schule/ITP/3.Klasse/Projekte/Artikelverwaltung/db/ER_Diagramm_frahofer.accdb");
-            }catch (SQLException throwables){
+    public static Connection getConnection() {
+        // https://prnt.sc/wmgge8
+        if(connection == null) {
+            try {
+                connection = DriverManager.getConnection("jdbc:ucanaccess://D://SEW//Ticketsystem_Rahofer_Gyurdzhiyski//db//ticketsystem_gyurdzhiyski.accdb");
+            } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         }
