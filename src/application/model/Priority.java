@@ -36,7 +36,7 @@ public class Priority {
                 p.id = result.getInt("priority_id");
                 p.name = result.getString("name");
                 list.add(p);
-                System.out.println("yeet 2");
+
             }
 
         } catch (SQLException throwables) {
