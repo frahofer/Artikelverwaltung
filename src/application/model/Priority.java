@@ -33,7 +33,8 @@ public class Priority {
 
             while(result.next()){
                 Priority p = new Priority();
-                p.id = result.getInt("priority_id");
+                // Anpassen mit eigene Tabelle
+                p.id = result.getInt("priorties_id");
                 p.name = result.getString("name");
                 list.add(p);
 

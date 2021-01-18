@@ -217,7 +217,7 @@ public class Controller {
         Ticket t2 = new Ticket();
         ObservableList<Ticket> remove_list = FXCollections.observableArrayList();;
 
-        for(Ticket t: liste){
+        for(Ticket t : liste){
             for(j = 0; j < liste.size(); ++j){
                 t2 = liste.get(j);
                 if(t.id == t2.id){
