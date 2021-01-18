@@ -19,7 +19,7 @@ public class AccessDb {
     public static Connection getConnection(){
         if(connection == null){
             try{
-                connection = DriverManager.getConnection("jdbc:ucanaccess://D:/Schule/ITP/3.Klasse/Projekte/Artikelverwaltung/db/ER_Diagramm_frahofer.accdb");
+                connection = DriverManager.getConnection("jdbc:ucanaccess://db/ER_Diagramm_frahofer.accdb");
             }catch (SQLException throwables){
                 throwables.printStackTrace();
             }
