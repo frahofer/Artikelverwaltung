@@ -4,6 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Ticket {
     public int id = 0;
@@ -11,6 +15,7 @@ public class Ticket {
     public String description = "";
     public int status_id = 0;
     public int priority_id = 0;
+    public int order_id = 0;
 
     @Override
     public String toString() {
@@ -31,6 +36,37 @@ public class Ticket {
 
         }
 
+    }
+
+    public static ObservableList<Ticket> loadList(){
+        ObservableList<Ticket> list = FXCollections.observableArrayList();
+
+        try{
+            Connection connection = AccessDb.getConnection();
+
+            Statement statement = null;
+
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM ticket");
+
+            while(result.next()){
+                Ticket t = new Ticket();
+                t.id = result.getInt("ticket_id");
+                t.name = result.getString("name");
+                t.description = result.getString("description");
+                t.priority_id = result.getInt("priority_id");
+                t.status_id = result.getInt("status_id");
+                t.order_id = result.getInt("order_id");
+
+                list.add(t);
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return list;
     }
 
     public static ObservableList<Ticket> loadFromFile(String filename){

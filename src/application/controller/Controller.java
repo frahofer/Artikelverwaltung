@@ -49,7 +49,7 @@ public class Controller {
         contentPane.getChildren().add(root);
 
         this.controller = (Controller_ticket) this.loader.getController();
-        liste_ticket = Ticket.loadFromFile(filename_ticket);
+        liste_ticket = Ticket.loadList();
         liste_status = Status.loadList();
         liste_priority = Priority.loadList();
 

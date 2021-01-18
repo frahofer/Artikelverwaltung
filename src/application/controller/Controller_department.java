@@ -24,7 +24,7 @@ public class Controller_department {
 
     public void initialize(){
 
-        department_listView.setItems(Department.loadFromFile(this.filename));
+        department_listView.setItems(Department.loadList());
 
     }
 

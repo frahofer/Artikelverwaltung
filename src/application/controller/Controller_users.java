@@ -123,7 +123,7 @@ public class Controller_users {
     }
 
     public void department_active(ActionEvent actionEvent) {
-        list_department = Department.loadFromFile(filename_department);
+        list_department = Department.loadList();
 
         departmentComboBox.setItems(list_department);
         departmentComboBox.setValue(listView_users.getSelectionModel().getSelectedItem());

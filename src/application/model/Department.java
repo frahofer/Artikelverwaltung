@@ -4,6 +4,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Department {
     public int id = 0;
@@ -13,6 +17,34 @@ public class Department {
     public String toString(){
         return id + " " + name;
     }
+
+    public static ObservableList<Department> loadList(){
+        ObservableList<Department> list = FXCollections.observableArrayList();
+
+        try{
+            Connection connection = AccessDb.getConnection();
+
+            Statement statement = null;
+
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM departments");
+
+            while(result.next()){
+                Department d= new Department();
+                d.id = result.getInt("department_id");
+                d.name = result.getString("name");
+
+                list.add(d);
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return list;
+    }
+
     public static ObservableList<Department> loadFromFile(String filename){
         ObservableList<Department> liste = FXCollections.observableArrayList();
 
