@@ -30,6 +30,8 @@ public class Controller_users {
 
     private String filename = "users.csv";
 
+    private String user_id = 0;
+
     Users tempUser = new Users();
 
     public String newString = "";
@@ -45,7 +47,7 @@ public class Controller_users {
 
     public void usersListViewClicked(MouseEvent mouseEvent) {
         tempUser = (Users) listView_users.getSelectionModel().getSelectedItem();
-        user_name.setText(tempUser.name);
+        this.user_id = tempUser.name;
         if (tempUser.titel != null) {
             user_title.setText(tempUser.titel);
         }
@@ -59,7 +61,7 @@ public class Controller_users {
     }
 
     public void cancel_user_clicked(ActionEvent actionEvent) {
-        user_name.setText(tempUser.name);
+        this.user_id = tempUser.name;
         user_title.setText(tempUser.titel);
         user_street.setText(tempUser.street);
         user_zip.setText(String.valueOf(tempUser.zip));
