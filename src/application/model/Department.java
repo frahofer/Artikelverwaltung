@@ -120,5 +120,18 @@ public class Department {
         }
     }
 
+    public void delete() {
+
+        try {
+            Connection connection = AccessDb.getConnection();
+
+            Statement statement = null;
+
+            statement = connection.createStatement();
+            statement.executeUpdate("DELETE FROM departments WHERE department_id = " + id);
+
+        } catch (SQLException throwables) {
+        }
+    }
 
 }

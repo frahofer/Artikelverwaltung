@@ -9,8 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-import java.io.*;
-    class Controller_priority {
+public class Controller_priority {
 
     public TextField priority_name;
     public ListView<Priority> priority_listView;
@@ -51,5 +50,17 @@ import java.io.*;
         Priority.writeToFile(this.oldString, this.newString, this.filename);
 
         priority_listView.refresh();
+    }
+
+    public void deleteClicked(ActionEvent actionEvent) {
+        Priority selectedPriority = (Priority) priority_listView.getSelectionModel().getSelectedItem();
+
+        priority_name.clear();
+        priority_listView.getItems().remove(selectedPriority);
+
+        selectedPriority.delete();
+    }
+
+    public void newClicked(ActionEvent actionEvent) {
     }
 }

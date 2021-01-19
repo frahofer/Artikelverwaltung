@@ -1,6 +1,7 @@
 package application.controller;
 
 import application.model.Department;
+import application.model.Status;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -63,4 +64,12 @@ public class Controller_department {
 
     }
 
+    public void deleteClicked(ActionEvent actionEvent) {
+        Department selectedPriority = (Department) department_listView.getSelectionModel().getSelectedItem();
+
+        department_name.clear();
+        department_listView.getItems().remove(selectedPriority);
+
+        selectedPriority.delete();
+    }
 }

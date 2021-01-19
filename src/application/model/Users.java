@@ -7,6 +7,9 @@ import javafx.collections.ObservableList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Users {
     public int id = 0;
@@ -53,5 +56,19 @@ public class Users {
             e.printStackTrace();
         }
         return liste;
+    }
+
+    public void delete() {
+
+        try {
+            Connection connection = AccessDb.getConnection();
+
+            Statement statement = null;
+
+            statement = connection.createStatement();
+            statement.executeUpdate("DELETE FROM users WHERE user_id = " + id);
+
+        } catch (SQLException throwables) {
+        }
     }
 }

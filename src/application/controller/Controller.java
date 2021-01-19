@@ -45,7 +45,7 @@ public class Controller {
 
     public void initialize(){
 
-        Parent root = this.loader.loadFXML("view/ticketPetko.fxml");
+        Parent root = this.loader.loadFXML("view/ticket.fxml");
         contentPane.getChildren().add(root);
 
         this.controller = (Controller_ticket) this.loader.getController();
@@ -64,40 +64,40 @@ public class Controller {
 
     public void editPriorityClicked(ActionEvent actionEvent) {
         MyFXMLLoader loader = new MyFXMLLoader();
-        loader.loadFXML("view/priorityPetko.fxml", "Priorität bearbeiten");
+        loader.loadFXML("view/priority.fxml", "Priorität bearbeiten");
     }
 
     public void editUserClicked(ActionEvent actionEvent) {
         MyFXMLLoader loader = new MyFXMLLoader();
-        loader.loadFXML("view/userFabian.fxml", "User bearbeiten");
+        loader.loadFXML("view/user.fxml", "User bearbeiten");
     }
 
     /*
     public void editTicketClicked(ActionEvent actionEvent) {
         MyFXMLLoader loader = new MyFXMLLoader();
-        loader.loadFXML("view/ticketPetko.fxml", "Ticket bearbeiten");
+        loader.loadFXML("view/ticket.fxml", "Ticket bearbeiten");
     }
 
      */
 
     public void editCommentClicked(ActionEvent actionEvent) {
         MyFXMLLoader loader = new MyFXMLLoader();
-        loader.loadFXML("view/commentFabian.fxml", "Comment bearbeiten");
+        loader.loadFXML("view/comment.fxml", "Comment bearbeiten");
     }
 
     public void editDepartmentClicked(ActionEvent actionEvent) {
         MyFXMLLoader loader = new MyFXMLLoader();
-        loader.loadFXML("view/departmentFabian.fxml", "Department bearbeiten");
+        loader.loadFXML("view/department.fxml", "Department bearbeiten");
     }
 
     public void editOrderClicked(ActionEvent actionEvent) {
         MyFXMLLoader loader = new MyFXMLLoader();
-        loader.loadFXML("view/orderPetko.fxml", "Order bearbeiten");
+        loader.loadFXML("view/order.fxml", "Order bearbeiten");
     }
 
     public void editStatusClicked(ActionEvent actionEvent) {
         MyFXMLLoader loader = new MyFXMLLoader();
-        loader.loadFXML("view/statusPetko.fxml", "Stati bearbeiten");
+        loader.loadFXML("view/status.fxml", "Stati bearbeiten");
     }
 
     public void ticketListViewClicked(MouseEvent mouseEvent) {

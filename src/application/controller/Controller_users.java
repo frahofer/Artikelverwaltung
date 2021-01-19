@@ -13,6 +13,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import org.hsqldb.rights.User;
 
 import java.io.*;
 
@@ -30,7 +31,7 @@ public class Controller_users {
 
     private String filename = "users.csv";
 
-    private String user_id = 0;
+    private String user_id = "";
 
     Users tempUser = new Users();
 
@@ -129,5 +130,14 @@ public class Controller_users {
 
         departmentComboBox.setItems(list_department);
         departmentComboBox.setValue(listView_users.getSelectionModel().getSelectedItem());
+    }
+
+    public void deleteClicked(ActionEvent actionEvent) {
+        Users selectedPriority = (Users) listView_users.getSelectionModel().getSelectedItem();
+
+        user_name.clear();
+        listView_users.getItems().remove(selectedPriority);
+
+        selectedPriority.delete();
     }
 }

@@ -81,6 +81,20 @@ public class Status {
 
     }
 
+    public void delete() {
+
+        try {
+            Connection connection = AccessDb.getConnection();
+
+            Statement statement = null;
+
+            statement = connection.createStatement();
+            statement.executeUpdate("DELETE FROM stati WHERE status_id = " + id);
+
+        } catch (SQLException throwables) {
+        }
+    }
+
     public static void writeToFile(String oldText, String newText, String filename){
 
         File fileToBeModified = new File(filename);

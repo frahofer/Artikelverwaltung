@@ -20,6 +20,20 @@ public class Priority {
         return name;
     }
 
+    public void delete() {
+
+        try {
+            Connection connection = AccessDb.getConnection();
+
+            Statement statement = null;
+
+            statement = connection.createStatement();
+            statement.executeUpdate("DELETE FROM priorities WHERE priority_id = " + id);
+
+        } catch (SQLException throwables) {
+        }
+    }
+
     public static ObservableList<Priority> loadList(){
         ObservableList<Priority> list = FXCollections.observableArrayList();
 
@@ -34,7 +48,7 @@ public class Priority {
             while(result.next()){
                 Priority p = new Priority();
                 // Anpassen mit eigene Tabelle
-                p.id = result.getInt("priorties_id");
+                p.id = result.getInt("priority_id");
                 p.name = result.getString("name");
                 list.add(p);
 

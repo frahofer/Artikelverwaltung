@@ -1,5 +1,6 @@
 package application.controller;
 
+import application.model.Priority;
 import application.model.Status;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -64,6 +65,15 @@ public class Controller_status {
         //olString für saveClicked
         this.oldString = temp2.id + ";" + temp2.name;
 
+    }
+
+    public void deleteClicked(ActionEvent actionEvent) {
+        Status selectedPriority = (Status) status_listView.getSelectionModel().getSelectedItem();
+
+        status_name.clear();
+        status_listView.getItems().remove(selectedPriority);
+
+        selectedPriority.delete();
     }
 
 }
