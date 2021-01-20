@@ -43,7 +43,7 @@ public class Controller_users {
     private String filename_department = "departments.csv";
 
     public void initialize() {
-        listView_users.setItems(Users.loadFromFile("users.csv"));
+        listView_users.setItems(Users.loadList());
     }
 
     public void usersListViewClicked(MouseEvent mouseEvent) {
@@ -72,17 +72,21 @@ public class Controller_users {
 
     public void save_user_clicked(ActionEvent actionEvent) {
         Users selectedUser = (Users) listView_users.getSelectionModel().getSelectedItem();
-        selectedUser.name = user_name.getText();
-        selectedUser.titel = user_title.getText();
-        selectedUser.street = user_street.getText();
-        selectedUser.zip = Integer.parseInt(user_zip.getText());
-        selectedUser.city = user_city.getText();
 
-        newString = selectedUser.id + ";" + selectedUser.titel + ";" + selectedUser.name + ";" + selectedUser.street + ";" + selectedUser.zip + ";" + selectedUser.depId;
+        if(selectedUser != null){
+            selectedUser.name = user_name.getText();
+            selectedUser.titel = user_title.getText();
+            selectedUser.street = user_street.getText();
+            selectedUser.zip = Integer.parseInt(user_zip.getText());
+            selectedUser.city = user_city.getText();
 
-        writeToFile(this.oldString, this.newString);
+            //newString = selectedUser.id + ";" + selectedUser.titel + ";" + selectedUser.name + ";" + selectedUser.street + ";" + selectedUser.zip + ";" + selectedUser.depId;
+            //writeToFile(this.oldString, this.newString);
 
-        listView_users.refresh();
+            listView_users.refresh();
+
+            selectedUser.update();
+        }
     }
 
     public void writeToFile(String oldText, String newText) {
