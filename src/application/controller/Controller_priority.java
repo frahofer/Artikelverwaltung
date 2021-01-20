@@ -43,13 +43,16 @@ public class Controller_priority {
 
     public void saveClicked(ActionEvent actionEvent) {
         Priority selectedPriority = (Priority) priority_listView.getSelectionModel().getSelectedItem();
-        selectedPriority.name = priority_name.getText();
+        if(selectedPriority != null){
+            selectedPriority.name = priority_name.getText();
 
-        newString = selectedPriority.name;
+            //newString = selectedPriority.name;
+            //Priority.writeToFile(this.oldString, this.newString, this.filename);
 
-        Priority.writeToFile(this.oldString, this.newString, this.filename);
+            priority_listView.refresh();
 
-        priority_listView.refresh();
+            selectedPriority.update();
+        }
     }
 
     public void deleteClicked(ActionEvent actionEvent) {

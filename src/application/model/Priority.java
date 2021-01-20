@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 //test
 public class Priority {
@@ -18,6 +15,22 @@ public class Priority {
     @Override
     public String toString() {
         return name;
+    }
+
+    public void update(){
+        try{
+            Connection connection = AccessDb.getConnection();
+
+            PreparedStatement statement = null;
+            statement = connection.prepareStatement("UPDATE priorities SET name = ? WHERE priority_id = ?");
+            statement.setString(1, name);
+            statement.setInt(2, id);
+
+            statement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
     }
 
     public void delete() {

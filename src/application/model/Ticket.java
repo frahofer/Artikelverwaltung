@@ -54,9 +54,9 @@ public class Ticket {
                 t.id = result.getInt("ticket_id");
                 t.name = result.getString("name");
                 t.description = result.getString("description");
-                t.priority_id = result.getInt("priority_id");
-                t.status_id = result.getInt("status_id");
-                t.order_id = result.getInt("order_id");
+                t.priority_id = result.getInt("priority_id(FK)");
+                t.status_id = result.getInt("status_id(FK)");
+                t.order_id = result.getInt("order_id(FK)");
 
                 list.add(t);
 
