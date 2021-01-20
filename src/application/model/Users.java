@@ -3,11 +3,13 @@ package application.model;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.hsqldb.rights.User;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -56,6 +58,32 @@ public class Users {
             e.printStackTrace();
         }
         return liste;
+    }
+    public static ObservableList<Users> loadList(){
+        ObservableList<Users> list = FXCollections.observableArrayList();
+
+        try{
+            Connection connection = AccessDb.getConnection();
+
+            Statement statement = null;
+
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM users");
+
+            while(result.next()){
+                Users d = new Users();
+                d.id = result.getInt("user_id");
+                d.name = result.getString("name");
+
+                list.add(d);
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return list;
     }
 
     public void delete() {
