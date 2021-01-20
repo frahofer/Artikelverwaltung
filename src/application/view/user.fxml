@@ -25,7 +25,7 @@
       <TextField fx:id="user_city" layoutX="272.0" layoutY="134.0" prefHeight="25.0" prefWidth="167.0" AnchorPane.leftAnchor="272.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="134.0" />
       <TextField fx:id="user_country" layoutX="272.0" layoutY="164.0" prefHeight="25.0" prefWidth="167.0" AnchorPane.leftAnchor="272.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="164.0" />
       <ListView fx:id="listView_users" layoutX="13.0" layoutY="29.0" onMouseClicked="#usersListViewClicked" prefHeight="200.0" prefWidth="204.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="238.0" AnchorPane.topAnchor="29.0" />
-      <ComboBox fx:id="departmentComboBox" layoutX="276.0" layoutY="196.0" onAction="#department_active" prefHeight="25.0" prefWidth="167.0" />
+      <ComboBox fx:id="departmentComboBox" layoutX="276.0" layoutY="196.0" prefHeight="25.0" prefWidth="167.0" />
       <Button layoutX="204.0" layoutY="246.0" mnemonicParsing="false" onAction="#deleteClicked" text="Löschen" />
    </children>
 </AnchorPane>

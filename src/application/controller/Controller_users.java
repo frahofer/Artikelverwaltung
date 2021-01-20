@@ -30,43 +30,65 @@ public class Controller_users {
     public ComboBox departmentComboBox;
 
     private String filename = "users.csv";
-
-    private String user_id = "";
+    private int user_id_temp = 0;
+    private int department_id_temp = 0;
 
     Users tempUser = new Users();
 
     public String newString = "";
     public String oldString = "";
 
-
     ObservableList<Department> list_department = FXCollections.observableArrayList();
     private String filename_department = "departments.csv";
 
     public void initialize() {
         listView_users.setItems(Users.loadList());
+        list_department = Department.loadList();
+        departmentComboBox.setItems(list_department);
     }
 
     public void usersListViewClicked(MouseEvent mouseEvent) {
         tempUser = (Users) listView_users.getSelectionModel().getSelectedItem();
-        this.user_id = tempUser.name;
+
+        this.user_id_temp = tempUser.id;
+        user_name.setText(tempUser.name);
         if (tempUser.titel != null) {
             user_title.setText(tempUser.titel);
+        }else{
+            user_title.setText("");
         }
         user_street.setText(tempUser.street);
         user_zip.setText(String.valueOf(tempUser.zip));
         user_city.setText(tempUser.city);
-        //list_department = Department.loadFromFile(filename_department);
-        //departmentComboBox.setItems(list_department);
+        user_country.setText(tempUser.country);
 
-        this.oldString = tempUser.id + ";" + tempUser.titel + ";" + tempUser.name + ";" + tempUser.street + ";" + tempUser.zip + ";" + tempUser.depId;
+        for (Department d : list_department){
+            if (d.id == tempUser.depId){
+                departmentComboBox.setValue(d);
+            }
+        }
+
+        //this.oldString = tempUser.id + ";" + tempUser.titel + ";" + tempUser.name + ";" + tempUser.street + ";" + tempUser.zip + ";" + tempUser.depId;
     }
 
     public void cancel_user_clicked(ActionEvent actionEvent) {
-        this.user_id = tempUser.name;
-        user_title.setText(tempUser.titel);
+        this.user_id_temp = tempUser.id;
+        user_name.setText(tempUser.name);
+        if (tempUser.titel != null) {
+            user_title.setText(tempUser.titel);
+        }else{
+            user_title.setText("");
+        }
         user_street.setText(tempUser.street);
         user_zip.setText(String.valueOf(tempUser.zip));
         user_city.setText(tempUser.city);
+        user_country.setText(tempUser.country);
+
+        for (Department d : list_department){
+            if (d.id == tempUser.depId){
+                departmentComboBox.setValue(d);
+            }
+        }
         Platform.exit();
     }
 
@@ -74,11 +96,15 @@ public class Controller_users {
         Users selectedUser = (Users) listView_users.getSelectionModel().getSelectedItem();
 
         if(selectedUser != null){
+            selectedUser.id = user_id_temp;
             selectedUser.name = user_name.getText();
             selectedUser.titel = user_title.getText();
             selectedUser.street = user_street.getText();
             selectedUser.zip = Integer.parseInt(user_zip.getText());
             selectedUser.city = user_city.getText();
+            selectedUser.country = user_country.getText();
+            Department tempDep = (Department) departmentComboBox.getValue();
+            selectedUser.depId = tempDep.id;
 
             //newString = selectedUser.id + ";" + selectedUser.titel + ";" + selectedUser.name + ";" + selectedUser.street + ";" + selectedUser.zip + ";" + selectedUser.depId;
             //writeToFile(this.oldString, this.newString);
@@ -137,11 +163,17 @@ public class Controller_users {
     }
 
     public void deleteClicked(ActionEvent actionEvent) {
-        Users selectedPriority = (Users) listView_users.getSelectionModel().getSelectedItem();
+        Users selectedUser = (Users) listView_users.getSelectionModel().getSelectedItem();
 
         user_name.clear();
-        listView_users.getItems().remove(selectedPriority);
+        user_title.clear();
+        user_street.clear();
+        user_zip.clear();
+        user_city.clear();
+        user_country.clear();
+        departmentComboBox.setValue(null);
 
-        selectedPriority.delete();
+        listView_users.getItems().remove(selectedUser);
+        selectedUser.delete();
     }
 }

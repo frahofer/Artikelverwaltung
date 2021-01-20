@@ -17,6 +17,7 @@ public class Users {
     public String street = "";
     public int zip = 0;
     public String city = "";
+    public String country = "";
     public int depId = 0;
 
     private String filename = "users.csv";
@@ -30,9 +31,15 @@ public class Users {
             Connection connection = AccessDb.getConnection();
 
             PreparedStatement statement = null;
-            statement = connection.prepareStatement("UPDATE users SET name = ? WHERE priority_id = ?");
+            statement = connection.prepareStatement("UPDATE users SET name = ?, title = ?, street = ?, zip = ?, city = ?, country = ?, department_id(FK) = ? WHERE user_id = ?");
             statement.setString(1, name);
-            statement.setInt(2, id);
+            statement.setString(2, titel);
+            statement.setString(3, street);
+            statement.setInt(4, zip);
+            statement.setString(5, city);
+            statement.setString(6, country);
+            statement.setInt(7, depId);
+            statement.setInt(8, id);
 
             statement.executeUpdate();
         }catch (SQLException e){
@@ -91,6 +98,7 @@ public class Users {
                 u.street = result.getString("street");
                 u.zip = result.getInt("zip");
                 u.city = result.getString("city");
+                u.country = result.getString("country");
                 u.depId = result.getInt("department_id(FK)");
 
                 list.add(u);

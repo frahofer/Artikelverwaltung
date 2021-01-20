@@ -16,10 +16,10 @@ public class Controller_status {
     public ListView<Status> status_listView;
 
     private String filename = "stati.csv";
+    private int status_id_temp = 0;
+
     public String newString = "";
     public String oldString = "";
-
-    private int status_id = 0;
 
     Status temp2 = new Status();
 
@@ -35,7 +35,7 @@ public class Controller_status {
 
         //setzte Felder zurück auf den letzten ausgewählten status
 
-        this.status_id = temp2.id;
+        this.status_id_temp = temp2.id;
         status_name.setText(temp2.name);
 
     }
@@ -43,14 +43,18 @@ public class Controller_status {
     public void saveClicked(ActionEvent actionEvent) {
 
         Status selectedArticle = (Status) status_listView.getSelectionModel().getSelectedItem();
-        selectedArticle.name = status_name.getText();
-        selectedArticle.id = this.status_id;
 
-        newString = selectedArticle.id + ";" + selectedArticle.name;
+        if(selectedArticle != null){
+            selectedArticle.name = status_name.getText();
+            selectedArticle.id = this.status_id_temp;
 
-        Status.writeToFile(this.oldString, newString, this.filename);
+            //newString = selectedArticle.id + ";" + selectedArticle.name;
+            //Status.writeToFile(this.oldString, newString, this.filename);
 
-        status_listView.refresh();
+            status_listView.refresh();
+
+            selectedArticle.update();
+        }
 
     }
 
@@ -59,11 +63,11 @@ public class Controller_status {
 
         //fülle Felder rechts
 
-        this.status_id = temp2.id;
+        this.status_id_temp = temp2.id;
         status_name.setText(temp2.name);
 
         //olString für saveClicked
-        this.oldString = temp2.id + ";" + temp2.name;
+        //this.oldString = temp2.id + ";" + temp2.name;
 
     }
 

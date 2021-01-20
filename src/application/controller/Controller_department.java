@@ -40,14 +40,18 @@ public class Controller_department {
     public void saveClicked(ActionEvent actionEvent) {
 
         Department selectedArticle = department_listView.getSelectionModel().getSelectedItem();
-        selectedArticle.name = department_name.getText();
-        selectedArticle.id = department_id;
 
-        newString = selectedArticle.id + ";" + selectedArticle.name;
+        if(selectedArticle != null){
+            selectedArticle.name = department_name.getText();
+            selectedArticle.id = department_id;
 
-        Department.writeToFile(this.oldString, newString, this.filename);
+            //newString = selectedArticle.id + ";" + selectedArticle.name;
+            //Department.writeToFile(this.oldString, newString, this.filename);
 
-        department_listView.refresh();
+            department_listView.refresh();
+
+            selectedArticle.update();
+        }
 
     }
 

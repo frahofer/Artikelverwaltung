@@ -14,13 +14,14 @@ public class Controller_priority {
     public TextField priority_name;
     public ListView<Priority> priority_listView;
 
-    public String newString = "";
     public String oldString = "";
+    public String newString = "";
 
     public ObservableList<Priority> liste = FXCollections.observableArrayList();
 
     Priority tempPrio = new Priority();
     private String filename = "priorities.csv";
+    private int priority_id_temp = 0;
 
     public void initialize() {
         priority_listView.setItems(Priority.loadList());
@@ -30,14 +31,16 @@ public class Controller_priority {
         tempPrio = (Priority) priority_listView.getSelectionModel().getSelectedItem();
 
         priority_name.setText(tempPrio.name);
+        priority_id_temp = tempPrio.id;
 
-        this.oldString = tempPrio.name;
+        //this.oldString = tempPrio.name;
 
     }
 
-
     public void priorityCancelClicked() {
         priority_name.setText(tempPrio.name);
+        priority_id_temp = tempPrio.id;
+
         Platform.exit();
     }
 
@@ -45,6 +48,7 @@ public class Controller_priority {
         Priority selectedPriority = (Priority) priority_listView.getSelectionModel().getSelectedItem();
         if(selectedPriority != null){
             selectedPriority.name = priority_name.getText();
+            selectedPriority.id = priority_id_temp;
 
             //newString = selectedPriority.name;
             //Priority.writeToFile(this.oldString, this.newString, this.filename);

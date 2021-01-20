@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Department {
     public int id = 0;
@@ -16,6 +13,22 @@ public class Department {
     @Override
     public String toString(){
         return id + " " + name;
+    }
+
+    public void update(){
+        try{
+            Connection connection = AccessDb.getConnection();
+
+            PreparedStatement statement = null;
+            statement = connection.prepareStatement("UPDATE departments SET name = ? WHERE priority_id = ?");
+            statement.setString(1, name);
+            statement.setInt(2, id);
+
+            statement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
     }
 
     public static ObservableList<Department> loadList(){
