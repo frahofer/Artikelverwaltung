@@ -18,6 +18,7 @@ public class Users {
     public int zip = 0;
     public String city = "";
     public String country = "";
+    public Department dep = new Department();
     public int depId = 0;
 
     private String filename = "users.csv";
@@ -100,6 +101,7 @@ public class Users {
                 u.city = result.getString("city");
                 u.country = result.getString("country");
                 u.depId = result.getInt("department_id(FK)");
+                u.dep = Department.getbyId(u.depId);
 
                 list.add(u);
 

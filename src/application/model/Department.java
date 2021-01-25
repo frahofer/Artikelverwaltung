@@ -15,6 +15,28 @@ public class Department {
         return id + " " + name;
     }
 
+
+    public static Department getbyId(int id){
+        Department obj = new Department();
+        try{
+            Connection connection = AccessDb.getConnection();
+
+            Statement statement = null;
+
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM departments WHERE department_id = " + id);
+
+            if (result.next()){
+                obj.id = result.getInt("department_id");
+                obj.name = result.getString("name");
+
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return obj;
+    };
+
     public void update(){
         try{
             Connection connection = AccessDb.getConnection();

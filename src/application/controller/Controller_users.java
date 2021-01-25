@@ -62,11 +62,15 @@ public class Controller_users {
         user_city.setText(tempUser.city);
         user_country.setText(tempUser.country);
 
+        departmentComboBox.setValue(tempUser.dep);
+        /*
         for (Department d : list_department){
             if (d.id == tempUser.depId){
                 departmentComboBox.setValue(d);
             }
         }
+
+         */
 
         //this.oldString = tempUser.id + ";" + tempUser.titel + ";" + tempUser.name + ";" + tempUser.street + ";" + tempUser.zip + ";" + tempUser.depId;
     }
@@ -84,11 +88,15 @@ public class Controller_users {
         user_city.setText(tempUser.city);
         user_country.setText(tempUser.country);
 
+        departmentComboBox.setValue(tempUser.dep);
+        /*
         for (Department d : list_department){
             if (d.id == tempUser.depId){
                 departmentComboBox.setValue(d);
             }
         }
+
+         */
         Platform.exit();
     }
 
@@ -103,8 +111,8 @@ public class Controller_users {
             selectedUser.zip = Integer.parseInt(user_zip.getText());
             selectedUser.city = user_city.getText();
             selectedUser.country = user_country.getText();
-            Department tempDep = (Department) departmentComboBox.getValue();
-            selectedUser.depId = tempDep.id;
+            selectedUser.dep = (Department) departmentComboBox.getValue();
+            selectedUser.depId = selectedUser.dep.id;
 
             //newString = selectedUser.id + ";" + selectedUser.titel + ";" + selectedUser.name + ";" + selectedUser.street + ";" + selectedUser.zip + ";" + selectedUser.depId;
             //writeToFile(this.oldString, this.newString);
