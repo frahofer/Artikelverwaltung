@@ -54,8 +54,11 @@ public class Department {
     }
 
     public static ObservableList<Department> loadList(){
+        ///***\\\ public static Department getById(int id) {
+
         ObservableList<Department> list = FXCollections.observableArrayList();
 
+        ///***\\\ Department obj = null;
         try{
             Connection connection = AccessDb.getConnection();
 
@@ -64,6 +67,8 @@ public class Department {
             statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM departments");
 
+            ///***\\\ if(result.next()) {
+            ///***\\\ obj = new Department(result.getInt("department_id", result.getString("name"));
             while(result.next()){
                 Department d= new Department();
                 d.id = result.getInt("department_id");
@@ -77,6 +82,7 @@ public class Department {
             throwables.printStackTrace();
         }
 
+        ///***\\\ return obj;
         return list;
     }
 
