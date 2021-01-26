@@ -18,14 +18,54 @@ public class Users {
     public int zip = 0;
     public String city = "";
     public String country = "";
-    public Department dep = new Department();
-    public int depId = 0;
+    public Department dep = null;
 
     private String filename = "users.csv";
     @Override
     public String toString() {
         return name + " " + titel + " " + street;
     }
+
+    public Users(int id, String name, String title, String street, int zip, String city, String country, Department dep){
+        this.id = id;
+        this.name = name;
+        this.titel = title;
+        this.street = street;
+        this.zip = zip;
+        this.city = city;
+        this.country = country;
+        this.dep = dep;
+
+    }
+
+    public static Users getbyId(int id){
+        Users obj = null;
+        try{
+            Connection connection = AccessDb.getConnection();
+
+            Statement statement = null;
+
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM users WHERE user_id = " + id);
+
+            if (result.next()){
+                obj = new Users(
+                        result.getInt("user_id"),
+                        result.getString("name"),
+                        result.getString("title"),
+                        result.getString("street"),
+                        result.getInt("zip"),
+                        result.getString("city"),
+                        result.getString("country"),
+                        Department.getbyId(result.getInt("department_id(FK)"))
+                );
+
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return obj;
+    };
 
     public void update(){
         try{
@@ -39,7 +79,7 @@ public class Users {
             statement.setInt(4, zip);
             statement.setString(5, city);
             statement.setString(6, country);
-            statement.setInt(7, depId);
+            statement.setInt(7, dep.id);
             statement.setInt(8, id);
 
             statement.executeUpdate();
@@ -49,37 +89,6 @@ public class Users {
 
     }
 
-    public static ObservableList<Users> loadFromFile(String filename) {
-        ObservableList<Users> liste = FXCollections.observableArrayList();
-        String s;
-        BufferedReader br = null;
-
-        try {
-            br = new BufferedReader(new FileReader(filename));
-            try {
-
-                while ((s = br.readLine()) != null) {
-                    // s enthält die gesamte Zeile
-                    Users a = new Users();
-                    String[] split = s.split(";");
-                    a.id = Integer.parseInt(split[0]);
-                    a.titel = split[1];
-                    a.name = split[2];
-                    a.street = split[3];
-                    a.zip = Integer.parseInt(split[4]);
-                    a.city = split[5];
-                    a.depId = Integer.parseInt(split[6]);
-
-                    liste.add(a);
-                }
-            } finally {
-                br.close();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return liste;
-    }
     public static ObservableList<Users> loadList(){
         ObservableList<Users> list = FXCollections.observableArrayList();
 
@@ -92,16 +101,16 @@ public class Users {
             ResultSet result = statement.executeQuery("SELECT * FROM users");
 
             while(result.next()){
-                Users u = new Users();
-                u.id = result.getInt("user_id");
-                u.titel = result.getString("title");
-                u.name = result.getString("name");
-                u.street = result.getString("street");
-                u.zip = result.getInt("zip");
-                u.city = result.getString("city");
-                u.country = result.getString("country");
-                u.depId = result.getInt("department_id(FK)");
-                u.dep = Department.getbyId(u.depId);
+                Users u = new Users(
+                        result.getInt("user_id"),
+                        result.getString("name"),
+                        result.getString("title"),
+                        result.getString("street"),
+                        result.getInt("zip"),
+                        result.getString("city"),
+                        result.getString("country"),
+                        Department.getbyId(result.getInt("department_id(FK)"))
+                );
 
                 list.add(u);
 

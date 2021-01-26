@@ -18,14 +18,9 @@ public class Controller_status {
     private String filename = "stati.csv";
     private int status_id_temp = 0;
 
-    public String newString = "";
-    public String oldString = "";
-
-    Status temp2 = new Status();
+    Status temp2 = null;
 
     public void initialize(){
-
-        //liste = Status.loadFromFile(filename);
 
         status_listView.setItems(Status.loadList());
 
@@ -42,32 +37,28 @@ public class Controller_status {
 
     public void saveClicked(ActionEvent actionEvent) {
 
-        Status selectedArticle = (Status) status_listView.getSelectionModel().getSelectedItem();
+        Status selectedStatus = status_listView.getSelectionModel().getSelectedItem();
 
-        if(selectedArticle != null){
-            selectedArticle.name = status_name.getText();
-            selectedArticle.id = this.status_id_temp;
+        if(selectedStatus != null){
 
-            //newString = selectedArticle.id + ";" + selectedArticle.name;
-            //Status.writeToFile(this.oldString, newString, this.filename);
+            selectedStatus = new Status(
+                    status_id_temp,
+                    status_name.getText()
+            );
 
             status_listView.refresh();
-
-            selectedArticle.update();
+            selectedStatus.update();
         }
 
     }
 
     public void handleMouseClicked(MouseEvent mouseEvent) {
-        temp2 = (Status) status_listView.getSelectionModel().getSelectedItem();
+        temp2 = status_listView.getSelectionModel().getSelectedItem();
 
         //fülle Felder rechts
 
         this.status_id_temp = temp2.id;
         status_name.setText(temp2.name);
-
-        //olString für saveClicked
-        //this.oldString = temp2.id + ";" + temp2.name;
 
     }
 

@@ -41,7 +41,7 @@ public class Controller {
 
     private Controller_ticket active = null;
 
-    private Ticket temp = new Ticket();
+    private Ticket temp = null;
 
     public void initialize(){
 
@@ -72,14 +72,6 @@ public class Controller {
         loader.loadFXML("view/user.fxml", "User bearbeiten");
     }
 
-    /*
-    public void editTicketClicked(ActionEvent actionEvent) {
-        MyFXMLLoader loader = new MyFXMLLoader();
-        loader.loadFXML("view/ticket.fxml", "Ticket bearbeiten");
-    }
-
-     */
-
     public void editCommentClicked(ActionEvent actionEvent) {
         MyFXMLLoader loader = new MyFXMLLoader();
         loader.loadFXML("view/comment.fxml", "Comment bearbeiten");
@@ -104,31 +96,11 @@ public class Controller {
 
         controller.passListView(ticketListView);
 
-        /*
-        if (ticketListView.getSelectionModel().getSelectedItem() != null) {
-
-            MyFXMLLoader loader = new MyFXMLLoader();
-            Parent root = loader.loadFXML("view/ticket.fxml");
-            AnchorPane.setBottomAnchor(root, 0.0);
-            AnchorPane.setTopAnchor(root, 0.0);
-            AnchorPane.setLeftAnchor(root, 0.0);
-            AnchorPane.setRightAnchor(root, 0.0);
-            contentPane.getChildren().add(root);
-
-            active = (Controller_ticket) loader.getController();
-            active.setTicket(ticketListView.getSelectionModel().getSelectedItem());
-            //active.passTicket(ticketListView);
-        }
-         */
-
     }
-
 
     public void status_ComboBox_Active(ActionEvent actionEvent) {
 
-
-
-        Status selectedStatus = (Status) filterStatusComboBox.getSelectionModel().getSelectedItem();
+        Status selectedStatus = filterStatusComboBox.getSelectionModel().getSelectedItem();
 
         for (Ticket ticket : listClone_ticket) {
 
@@ -188,7 +160,7 @@ public class Controller {
 
     public void deleteClicked(ActionEvent actionEvent) {
 
-        Ticket selectedTicket = (Ticket) ticketListView.getSelectionModel().getSelectedItem();
+        Ticket selectedTicket = ticketListView.getSelectionModel().getSelectedItem();
 
         liste_ticket = controller.deleteClicked(selectedTicket, liste_ticket);
         ticketListView.setItems(liste_ticket);
@@ -214,7 +186,7 @@ public class Controller {
     public ObservableList<Ticket> removeDuplicants(ObservableList<Ticket> liste){
         int i = 0;
         int j = 0;
-        Ticket t2 = new Ticket();
+        Ticket t2 = null;
         ObservableList<Ticket> remove_list = FXCollections.observableArrayList();;
 
         for(Ticket t : liste){
@@ -225,19 +197,6 @@ public class Controller {
                 }
             }
         }
-
-/*
-        for(Ticket t: liste){
-            for (i = 0; i < remove_list.size(); ++i){
-                t2 = remove_list.get(i);
-                if(t.id == t2.id){
-                    liste.remove(t);
-                }
-            }
-        }
-
- */
-
 
         return liste;
     }

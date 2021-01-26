@@ -4,16 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Ticket {
     public int id = 0;
     public String name = "";
     public String description = "";
+    public Status status = null;
     public int status_id = 0;
+    public Priority priority = null;
     public int priority_id = 0;
     public int order_id = 0;
 
@@ -22,18 +21,49 @@ public class Ticket {
         return id + ";" + name + ";" + description + ";" + status_id + ";" + priority_id;
     }
 
-    public void saveNewTicket(Ticket newTicket, String filename) {
+    public Ticket(int id, String name, String description, Status status, Priority priority){
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.priority = priority;
 
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(filename, true));
+    }
 
-            bw.write(newTicket.id + ";" + newTicket.name + ";" + newTicket.description + ";" + newTicket.status_id + ";" + newTicket.priority_id + "\n");
+    public void update(){
+        try{
+            Connection connection = AccessDb.getConnection();
 
-            bw.flush();
-            bw.close();
+            PreparedStatement statement = null;
+            statement = connection.prepareStatement("UPDATE ticket SET name = ?, description = ?, priority_id(FK) = ?, status_id(FK) = ? WHERE ticket_id = ?");
+            statement.setString(1, name);
+            statement.setString(2, description);
+            statement.setInt(3, priority.id);
+            statement.setInt(4, status.id);
+            statement.setInt(5, id);
 
-        } catch (IOException io) {
+            statement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
 
+    }
+
+    public void saveNewTicket() {
+        try{
+            Connection connection = AccessDb.getConnection();
+
+            PreparedStatement statement = null;
+            statement = connection.prepareStatement("INSERT INTO ticket SET ticket_id = ?, name = ?, description = ?, priority_id(FK) = ?, status_id(FK) = ?");
+            statement.setInt(1, id);
+            statement.setString(2, name);
+            statement.setString(3, description);
+            statement.setInt(4, priority.id);
+            statement.setInt(5, status.id);
+
+            statement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
         }
 
     }
@@ -50,13 +80,13 @@ public class Ticket {
             ResultSet result = statement.executeQuery("SELECT * FROM ticket");
 
             while(result.next()){
-                Ticket t = new Ticket();
-                t.id = result.getInt("ticket_id");
-                t.name = result.getString("name");
-                t.description = result.getString("description");
-                t.priority_id = result.getInt("priority_id");
-                t.status_id = result.getInt("status_id");
-                t.order_id = result.getInt("order_id");
+                Ticket t = new Ticket(
+                        result.getInt("ticket_id"),
+                        result.getString("name"),
+                        result.getString("description"),
+                        Status.getbyId(result.getInt("order_id(FK)")),
+                        Priority.getbyId(result.getInt("priority_id(FK)"))
+                );
 
                 list.add(t);
 
@@ -67,84 +97,6 @@ public class Ticket {
         }
 
         return list;
-    }
-
-    public static ObservableList<Ticket> loadFromFile(String filename){
-        ObservableList<Ticket> liste = FXCollections.observableArrayList();
-
-        String line = "";
-        BufferedReader reader = null;
-
-        try {
-            reader = new BufferedReader(new FileReader(filename));
-
-            try{
-
-                while((line = reader.readLine()) != null){
-
-                    String[] split = line.split(";");
-                    Ticket temp = new Ticket();
-
-                    temp.id = Integer.parseInt(split[0]);
-                    temp.name = split[1];
-                    temp.description = split[2];
-                    temp.status_id = Integer.parseInt(split[3]);
-                    temp.priority_id = Integer.parseInt(split[4]);
-
-                    liste.add(temp);
-
-                }
-
-            } finally {
-                reader.close();
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return liste;
-
-    }
-
-    public static void writeToFile(String oldText, String newText, String filename){
-
-        File fileToBeModified = new File(filename);
-
-        String oldContent = "";
-        BufferedReader reader = null;
-        FileWriter writer = null;
-
-        try {
-            reader = new BufferedReader(new FileReader(fileToBeModified));
-
-            String line = reader.readLine();
-
-            while (line != null) {
-                oldContent = oldContent + line + "\n";
-
-                line = reader.readLine();
-            }
-
-            String newContent = oldContent.replaceAll(oldText, newText);
-
-            writer = new FileWriter(fileToBeModified);
-            writer.write(newContent);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                assert reader != null;
-                reader.close();
-
-                assert writer != null;
-                writer.flush();
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
 }

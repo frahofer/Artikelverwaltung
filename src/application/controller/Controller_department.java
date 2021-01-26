@@ -16,12 +16,10 @@ public class Controller_department {
     public ListView<Department> department_listView;
 
     private String filename = "departments.csv";
-    public String newString = "";
-    public String oldString = "";
 
     private int department_id = 0;
 
-    Department temp2 = new Department();
+    Department temp2 = null; //wird sofort überschrieben
 
     public void initialize(){
 
@@ -39,18 +37,17 @@ public class Controller_department {
 
     public void saveClicked(ActionEvent actionEvent) {
 
-        Department selectedArticle = department_listView.getSelectionModel().getSelectedItem();
+        Department selectedDepartment = department_listView.getSelectionModel().getSelectedItem();
 
-        if(selectedArticle != null){
-            selectedArticle.name = department_name.getText();
-            selectedArticle.id = department_id;
-
-            //newString = selectedArticle.id + ";" + selectedArticle.name;
-            //Department.writeToFile(this.oldString, newString, this.filename);
+        if(selectedDepartment != null){
+            selectedDepartment = new Department(
+                    department_id,
+                    department_name.getText()
+            );
 
             department_listView.refresh();
 
-            selectedArticle.update();
+            selectedDepartment.update();
         }
 
     }
@@ -62,9 +59,6 @@ public class Controller_department {
 
         department_id = temp2.id;
         department_name.setText(temp2.name);
-
-        //olString für saveClicked
-        this.oldString = temp2.id + ";" + temp2.name;
 
     }
 

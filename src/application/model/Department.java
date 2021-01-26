@@ -15,9 +15,14 @@ public class Department {
         return id + " " + name;
     }
 
+    public Department(int id, String name){
+        this.id = id;
+        this.name = name;
+    }
+
 
     public static Department getbyId(int id){
-        Department obj = new Department();
+        Department obj = null;
         try{
             Connection connection = AccessDb.getConnection();
 
@@ -27,8 +32,10 @@ public class Department {
             ResultSet result = statement.executeQuery("SELECT * FROM departments WHERE department_id = " + id);
 
             if (result.next()){
-                obj.id = result.getInt("department_id");
-                obj.name = result.getString("name");
+                obj = new Department(result.getInt(
+                        "department_id"),
+                        result.getString("name")
+                );
 
             }
         }catch (SQLException e){
@@ -70,9 +77,10 @@ public class Department {
             ///***\\\ if(result.next()) {
             ///***\\\ obj = new Department(result.getInt("department_id", result.getString("name"));
             while(result.next()){
-                Department d= new Department();
-                d.id = result.getInt("department_id");
-                d.name = result.getString("name");
+                Department d = new Department(
+                        result.getInt("department_id"),
+                        result.getString("name")
+                );
 
                 list.add(d);
 
@@ -100,10 +108,8 @@ public class Department {
                 while((line = reader.readLine()) != null){
 
                     String[] split = line.split(";");
-                    Department temp = new Department();
 
-                    temp.id = Integer.parseInt(split[0]);
-                    temp.name = split[1];
+                    Department temp = new Department(Integer.parseInt(split[0]), split[1]);
 
                     liste.add(temp);
 
