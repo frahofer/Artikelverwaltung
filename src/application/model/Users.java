@@ -26,6 +26,7 @@ public class Users {
         return name + " " + titel + " " + street;
     }
 
+
     public Users(int id, String name, String title, String street, int zip, String city, String country, Department dep){
         this.id = id;
         this.name = name;

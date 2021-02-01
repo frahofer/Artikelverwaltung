@@ -15,6 +15,7 @@ public class Ticket {
     public Priority priority = null;
     public int priority_id = 0;
     public int order_id = 0;
+    public ObservableList<Users> liste_user = FXCollections.observableArrayList();
 
     @Override
     public String toString() {
@@ -27,7 +28,32 @@ public class Ticket {
         this.description = description;
         this.status = status;
         this.priority = priority;
+        this.liste_user = getUsers();
 
+    }
+
+    public ObservableList getUsers(){
+        ObservableList<Users> list = FXCollections.observableArrayList();
+
+        try{
+            Connection connection = AccessDb.getConnection();
+
+            Statement statement = null;
+
+            statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM users_to_ticket WHERE ticket_id(FK) = " + this.id);
+
+            while(result.next()){
+                Users u = Users.getbyId(result.getInt("user_id(FK)"));
+                list.add(u);
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return list;
     }
 
     public void update(){

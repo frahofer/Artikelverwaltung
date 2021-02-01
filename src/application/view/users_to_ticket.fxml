@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="483.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.Controller_users_to_ticket">
+   <children>
+      <ListView fx:id="left_listView" layoutX="14.0" layoutY="14.0" onMouseClicked="#left_listView_clicked" prefHeight="195.0" prefWidth="164.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
+      <Button layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#add_clicked" prefHeight="25.0" prefWidth="97.0" text="hinzufügen" AnchorPane.topAnchor="14.0" />
+      <Button layoutX="192.0" layoutY="44.0" mnemonicParsing="false" onAction="#remove_clicked" prefHeight="25.0" prefWidth="97.0" text="entfernen" AnchorPane.topAnchor="44.0" />
+      <Button layoutX="192.0" layoutY="74.0" mnemonicParsing="false" onAction="#add_all_clicked" text="alle hinzufügen" AnchorPane.topAnchor="74.0" />
+      <Button layoutX="192.0" layoutY="104.0" mnemonicParsing="false" onAction="#remove_all_clicked" prefHeight="25.0" prefWidth="97.0" text="alle entfernen" AnchorPane.topAnchor="104.0" />
+      <ListView fx:id="right_listView" layoutX="303.0" layoutY="14.0" onMouseClicked="#right_listView_clicked" prefHeight="195.0" prefWidth="164.0" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0" />
+   </children>
+</AnchorPane>

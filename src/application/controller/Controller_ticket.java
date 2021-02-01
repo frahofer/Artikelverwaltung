@@ -1,14 +1,14 @@
 package application.controller;
 
+import application.MyFXMLLoader;
 import application.model.Priority;
 import application.model.Status;
 import application.model.Ticket;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 public class Controller_ticket {
 
@@ -16,6 +16,8 @@ public class Controller_ticket {
     public TextArea ticket_description;
     public ComboBox<Status> statusComboBox;
     public ComboBox<Priority> priorityComboBox;
+    public ListView ticket_users_listView;
+    public Button edit_users;
 
     private String filename = "tickets.csv";
     private String filename_status = "stati.csv";
@@ -146,4 +148,11 @@ public class Controller_ticket {
         }
     }
 
+    public void ticket_users_listView_clicked(MouseEvent mouseEvent) {
+    }
+
+    public void edit_users_clicked(ActionEvent actionEvent) {
+        MyFXMLLoader loader = new MyFXMLLoader();
+        loader.loadFXML("view/users_to_ticket.fxml", "Edit Users");
+    }
 }
